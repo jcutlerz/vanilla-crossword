@@ -23,17 +23,30 @@ div {
 }
 
 .left-side,
-.outer-box,
 .right-side {
-  width: 33.3%;
+  flex-grow: 1;
 }
 
 .outer-box {
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 300px;
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner-box {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 200px;
+  max-height: 200px;
 }
 
 .square {
