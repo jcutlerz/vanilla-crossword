@@ -49,11 +49,20 @@ div {
   max-height: 200px;
 }
 
-.square {
-  /* min-height: 100px;
-  min-width: 100px; */
-}
-
 .square--inactive {
   background-color: black;
+}
+
+input {
+  appearance: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  caret-color: transparent;
+  cursor: default;
+}
+
+input:focus {
+  outline: none;
+  background: orchid;
 }
