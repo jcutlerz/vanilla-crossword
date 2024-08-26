@@ -11,12 +11,46 @@ squares.forEach((square) => {
   idCounter += 1;
 });
 
+// highlight each horizontal row when clicked
 inputs.forEach((input) => {
-  input.addEventListener("click", (event) => {
+  input.addEventListener("focus", (event) => {
     let parentEl = event.target.parentElement;
-    const nextId = parseInt(parentEl.id) + 1;
-    const nextCell = document.getElementById(nextId);
-    nextCell.children[0].classList.add("highlight");
+    let clickedId = parseInt(parentEl.id);
+    let rowBegin = 1;
+    if (clickedId % colCount === 0) {
+      rowBegin = clickedId - colCount + 1;
+    } else rowBegin = Math.floor(clickedId / colCount) * colCount + 1;
+    let rowEnd = rowBegin + colCount - 1;
+
+    console.log("clicked, begin, end");
+    console.log(clickedId, rowBegin, rowEnd);
+
+    // clear all previous highlighting
+    inputs.forEach((input) => {
+      input.classList.remove("highlight");
+    });
+
+    // highlight to the left of selected cell
+    for (let i = clickedId - 1; i >= rowBegin; i--) {
+      let cell = document.getElementById(i);
+      if (!cell.children[0]) {
+        break;
+      }
+      cell.children[0].classList.add("highlight");
+    }
+
+    // highlight to the right of selected cell
+    for (let i = clickedId + 1; i <= rowEnd; i++) {
+      let cell = document.getElementById(i);
+      if (!cell.children[0]) {
+        break;
+      }
+      cell.children[0].classList.add("highlight");
+    }
+
+    //const nextId = parseInt(parentEl.id) + 1;
+    //const nextCell = document.getElementById(nextId);
+    //nextCell.children[0].classList.add("highlight");
   });
 });
 
