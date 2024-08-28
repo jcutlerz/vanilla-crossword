@@ -8,6 +8,11 @@ const inputs = document.querySelectorAll("input");
 let idCounter = 1;
 squares.forEach((square) => {
   square.setAttribute("id", idCounter);
+  // start debug
+  if (square.children[0]) {
+    square.children[0].setAttribute("value", idCounter);
+  }
+  // end debug
   idCounter += 1;
 });
 
@@ -18,11 +23,12 @@ inputs.forEach((input) => {
     let clickedId = parseInt(parentEl.id);
 
     highlightAcross(clickedId);
+    highlightDown(clickedId);
   });
 });
 
 // clear all previous highlighting
-function clearHighlighting() {
+function clearGridHighlighting() {
   inputs.forEach((input) => {
     input.classList.remove("highlight");
   });
@@ -36,10 +42,8 @@ function highlightAcross(id) {
   } else rowBegin = Math.floor(id / colCount) * colCount + 1;
   let rowEnd = rowBegin + colCount - 1;
 
-  console.log("clicked, begin, end");
-  console.log(id, rowBegin, rowEnd);
-
-  clearHighlighting();
+  // clear previously applied highlighting
+  clearGridHighlighting();
 
   // highlight to the left of selected cell
   for (let i = id - 1; i >= rowBegin; i--) {
@@ -62,5 +66,24 @@ function highlightAcross(id) {
 
 // apply vertical highlighting to puzzle grid
 function highlightDown(id) {
-  console.log("sup");
+  // clear previously applied highlighting
+  //clearGridHighlighting();
+
+  // highlight above selected cell
+  for (let i = id; i > 0; i -= colCount) {
+    let cell = document.getElementById(i);
+    if (!cell.children[0]) {
+      break;
+    }
+    cell.children[0].classList.add("highlight");
+  }
+
+  // highlight below selected cell
+  for (let i = id; i <= rowCount * colCount; i += colCount) {
+    let cell = document.getElementById(i);
+    if (!cell.children[0]) {
+      break;
+    }
+    cell.children[0].classList.add("highlight");
+  }
 }
