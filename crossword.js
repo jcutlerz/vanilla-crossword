@@ -3,6 +3,8 @@ const colCount = 8;
 
 const squares = document.querySelectorAll(".square");
 const inputs = document.querySelectorAll("input");
+let prevCell = 0;
+let prevHighlight = "across";
 
 // number each square
 let idCounter = 1;
@@ -18,12 +20,20 @@ squares.forEach((square) => {
 
 // highlight each horizontal row when clicked
 inputs.forEach((input) => {
-  input.addEventListener("focus", (event) => {
+  input.addEventListener("click", (event) => {
     let parentEl = event.target.parentElement;
     let clickedId = parseInt(parentEl.id);
 
-    highlightAcross(clickedId);
-    highlightDown(clickedId);
+    // toggle between across and vertical highlighting
+    if (clickedId === prevCell && prevHighlight === "across") {
+      highlightDown(clickedId);
+      prevHighlight = "down";
+    } else {
+      highlightAcross(clickedId);
+      prevHighlight = "across";
+    }
+
+    prevCell = clickedId;
   });
 });
 
@@ -67,7 +77,7 @@ function highlightAcross(id) {
 // apply vertical highlighting to puzzle grid
 function highlightDown(id) {
   // clear previously applied highlighting
-  //clearGridHighlighting();
+  clearGridHighlighting();
 
   // highlight above selected cell
   for (let i = id; i > 0; i -= colCount) {
