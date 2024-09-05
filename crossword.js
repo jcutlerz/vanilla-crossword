@@ -18,8 +18,8 @@ squares.forEach((square) => {
   idCounter += 1;
 });
 
-// highlight each horizontal row when clicked
 inputs.forEach((input) => {
+  // click - apply highlighting to cell
   input.addEventListener("click", (event) => {
     let parentEl = event.target.parentElement;
     let clickedId = parseInt(parentEl.id);
@@ -34,6 +34,26 @@ inputs.forEach((input) => {
     }
 
     prevCell = clickedId;
+  });
+
+  // spacebar - toggle highlighting direction
+  input.addEventListener("keyup", (event) => {
+    if (event.key === " ") {
+      console.log("spacebar pressed");
+      let parentEl = event.target.parentElement;
+      let clickedId = parseInt(parentEl.id);
+
+      // toggle between across and vertical highlighting
+      if (clickedId === prevCell && prevHighlight === "across") {
+        highlightDown(clickedId);
+        prevHighlight = "down";
+      } else {
+        highlightAcross(clickedId);
+        prevHighlight = "across";
+      }
+
+      prevCell = clickedId;
+    }
   });
 });
 
