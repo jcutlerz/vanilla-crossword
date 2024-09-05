@@ -60,17 +60,17 @@ input {
   height: 100%;
   caret-color: transparent;
   cursor: default;
-}
-
-input:focus {
   outline: none;
-  background: orchid;
 }
 
 input::selection {
   background-color: transparent;
 }
 
-.highlight {
+.highlight-selected {
+  background-color: orchid;
+}
+
+.highlight-grid {
   background-color: lightpink;
 }

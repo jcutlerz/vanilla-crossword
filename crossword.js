@@ -33,13 +33,15 @@ inputs.forEach((input) => {
       prevHighlight = "across";
     }
 
+    input.classList.add("highlight-selected");
     prevCell = clickedId;
   });
 
   // spacebar - toggle highlighting direction
   input.addEventListener("keyup", (event) => {
-    if (event.key === " ") {
-      console.log("spacebar pressed");
+    const x = event.key;
+    console.log(x, typeof x);
+    if (x === " ") {
       let parentEl = event.target.parentElement;
       let clickedId = parseInt(parentEl.id);
 
@@ -52,6 +54,7 @@ inputs.forEach((input) => {
         prevHighlight = "across";
       }
 
+      input.classList.add("highlight-selected");
       prevCell = clickedId;
     }
   });
@@ -60,7 +63,8 @@ inputs.forEach((input) => {
 // clear all previous highlighting
 function clearGridHighlighting() {
   inputs.forEach((input) => {
-    input.classList.remove("highlight");
+    input.classList.remove("highlight-grid");
+    input.classList.remove("highlight-selected");
   });
 }
 
@@ -81,7 +85,7 @@ function highlightAcross(id) {
     if (!cell.children[0]) {
       break;
     }
-    cell.children[0].classList.add("highlight");
+    cell.children[0].classList.add("highlight-grid");
   }
 
   // highlight to the right of selected cell
@@ -90,7 +94,7 @@ function highlightAcross(id) {
     if (!cell.children[0]) {
       break;
     }
-    cell.children[0].classList.add("highlight");
+    cell.children[0].classList.add("highlight-grid");
   }
 }
 
@@ -101,19 +105,25 @@ function highlightDown(id) {
 
   // highlight above selected cell
   for (let i = id; i > 0; i -= colCount) {
+    if (i === id) {
+      continue;
+    }
     let cell = document.getElementById(i);
     if (!cell.children[0]) {
       break;
     }
-    cell.children[0].classList.add("highlight");
+    cell.children[0].classList.add("highlight-grid");
   }
 
   // highlight below selected cell
   for (let i = id; i <= rowCount * colCount; i += colCount) {
+    if (i === id) {
+      continue;
+    }
     let cell = document.getElementById(i);
     if (!cell.children[0]) {
       break;
     }
-    cell.children[0].classList.add("highlight");
+    cell.children[0].classList.add("highlight-grid");
   }
 }
