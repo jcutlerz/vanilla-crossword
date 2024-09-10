@@ -21,41 +21,14 @@ squares.forEach((square) => {
 inputs.forEach((input) => {
   // click - apply highlighting to cell
   input.addEventListener("click", (event) => {
-    let parentEl = event.target.parentElement;
-    let clickedId = parseInt(parentEl.id);
-
-    // toggle between across and vertical highlighting
-    if (clickedId === prevCell && prevHighlight === "across") {
-      highlightDown(clickedId);
-      prevHighlight = "down";
-    } else {
-      highlightAcross(clickedId);
-      prevHighlight = "across";
-    }
-
-    input.classList.add("highlight-selected");
-    prevCell = clickedId;
+    applyHighlight(input, event);
   });
 
   // spacebar - toggle highlighting direction
   input.addEventListener("keyup", (event) => {
     const x = event.key;
-    console.log(x, typeof x);
     if (x === " ") {
-      let parentEl = event.target.parentElement;
-      let clickedId = parseInt(parentEl.id);
-
-      // toggle between across and vertical highlighting
-      if (clickedId === prevCell && prevHighlight === "across") {
-        highlightDown(clickedId);
-        prevHighlight = "down";
-      } else {
-        highlightAcross(clickedId);
-        prevHighlight = "across";
-      }
-
-      input.classList.add("highlight-selected");
-      prevCell = clickedId;
+      applyHighlight(input, event);
     }
   });
 });
@@ -126,4 +99,22 @@ function highlightDown(id) {
     }
     cell.children[0].classList.add("highlight-grid");
   }
+}
+
+// apply highlighting after certain events
+function applyHighlight(input, event) {
+  let parentEl = event.target.parentElement;
+  let clickedId = parseInt(parentEl.id);
+
+  // toggle between across and vertical highlighting
+  if (clickedId === prevCell && prevHighlight === "across") {
+    highlightDown(clickedId);
+    prevHighlight = "down";
+  } else {
+    highlightAcross(clickedId);
+    prevHighlight = "across";
+  }
+
+  input.classList.add("highlight-selected");
+  prevCell = clickedId;
 }
