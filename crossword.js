@@ -21,14 +21,71 @@ squares.forEach((square) => {
 inputs.forEach((input) => {
   // click - apply highlighting to cell
   input.addEventListener("click", (event) => {
-    applyHighlight(input, event);
+    let parentEl = event.target.parentElement;
+    let selectedId = parseInt(parentEl.id);
+    applyGridHighlight(selectedId);
+    input.classList.add("highlight-selected");
   });
+
+  // TODO
+  // still some edge case type errors to clean up
 
   // spacebar - toggle highlighting direction
   input.addEventListener("keyup", (event) => {
-    const x = event.key;
-    if (x === " ") {
-      applyHighlight(input, event);
+    let newCell = prevCell;
+    switch (event.key) {
+      case " ":
+        applyGridHighlight(newCell);
+        squares[newCell - 1].children[0].classList.add("highlight-selected");
+        break;
+      case "ArrowRight":
+        // squares index is one less than id
+        newCell += 1;
+        if (!squares[newCell - 1]) {
+          break;
+        }
+        while (!squares[newCell - 1].children[0]) {
+          newCell += 1;
+        }
+        applyGridHighlight(newCell);
+        squares[newCell - 1].children[0].classList.add("highlight-selected");
+        break;
+      case "ArrowLeft":
+        // squares index is one less than id
+        newCell -= 1;
+        if (!squares[newCell - 1]) {
+          break;
+        }
+        while (!squares[newCell - 1].children[0]) {
+          newCell -= 1;
+        }
+        applyGridHighlight(newCell);
+        squares[newCell - 1].children[0].classList.add("highlight-selected");
+        break;
+      case "ArrowDown":
+        // squares index is one less than id
+        newCell += colCount;
+        if (!squares[newCell - 1]) {
+          break;
+        }
+        while (!squares[newCell - 1].children[0]) {
+          newCell += colCount;
+        }
+        applyGridHighlight(newCell);
+        squares[newCell - 1].children[0].classList.add("highlight-selected");
+        break;
+      case "ArrowUp":
+        // squares index is one less than id
+        newCell -= colCount;
+        if (!squares[newCell - 1]) {
+          break;
+        }
+        while (!squares[newCell - 1].children[0]) {
+          newCell -= colCount;
+        }
+        applyGridHighlight(newCell);
+        squares[newCell - 1].children[0].classList.add("highlight-selected");
+        break;
     }
   });
 });
@@ -101,20 +158,16 @@ function highlightDown(id) {
   }
 }
 
-// apply highlighting after certain events
-function applyHighlight(input, event) {
-  let parentEl = event.target.parentElement;
-  let clickedId = parseInt(parentEl.id);
-
+// apply grid highlighting after certain events
+function applyGridHighlight(id) {
   // toggle between across and vertical highlighting
-  if (clickedId === prevCell && prevHighlight === "across") {
-    highlightDown(clickedId);
+  if (id === prevCell && prevHighlight === "across") {
+    highlightDown(id);
     prevHighlight = "down";
   } else {
-    highlightAcross(clickedId);
+    highlightAcross(id);
     prevHighlight = "across";
   }
 
-  input.classList.add("highlight-selected");
-  prevCell = clickedId;
+  prevCell = id;
 }
