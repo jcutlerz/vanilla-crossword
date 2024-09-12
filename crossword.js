@@ -27,73 +27,36 @@ inputs.forEach((input) => {
     input.classList.add("highlight-selected");
   });
 
-  // TODO
-  // still some edge case type errors to clean up
-
-  // spacebar - toggle highlighting direction
   input.addEventListener("keyup", (event) => {
     let newCell = prevCell;
+    let i = 0;
     switch (event.key) {
+      // spacebar - toggle highlighting direction
       case " ":
         applyGridHighlight(newCell);
         squares[newCell - 1].children[0].classList.add("highlight-selected");
         break;
       case "ArrowRight":
-        // squares index is one less than id
-        newCell += 1;
-        while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
-          if (!squares[newCell - 1]) {
-            break;
-          }
-          newCell += 1;
-        }
-        if (!squares[newCell - 1]) {
-          break;
-        } else {
-          applyGridHighlight(newCell);
-          squares[newCell - 1].children[0].classList.add("highlight-selected");
-          break;
-        }
       case "ArrowLeft":
-        // squares index is one less than id
-        newCell -= 1;
-        while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
-          if (!squares[newCell - 1]) {
-            break;
-          }
-          newCell -= 1;
-        }
-        if (!squares[newCell - 1]) {
-          break;
-        } else {
-          applyGridHighlight(newCell);
-          squares[newCell - 1].children[0].classList.add("highlight-selected");
-          break;
-        }
-      case "ArrowDown":
-        // squares index is one less than id
-        newCell += colCount;
-        while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
-          if (!squares[newCell - 1]) {
-            break;
-          }
-          newCell += colCount;
-        }
-        if (!squares[newCell - 1]) {
-          break;
-        } else {
-          applyGridHighlight(newCell);
-          squares[newCell - 1].children[0].classList.add("highlight-selected");
-          break;
-        }
       case "ArrowUp":
+      case "ArrowDown":
+        if (event.key === "ArrowRight") {
+          i = 1;
+        } else if (event.key === "ArrowLeft") {
+          i = -1;
+        } else if (event.key === "ArrowUp") {
+          i = -1 * colCount;
+        } else if (event.key === "ArrowDown") {
+          i = colCount;
+        }
+
+        newCell += i;
         // squares index is one less than id
-        newCell -= colCount;
         while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
           if (!squares[newCell - 1]) {
             break;
           }
-          newCell -= colCount;
+          newCell += i;
         }
         if (!squares[newCell - 1]) {
           break;
