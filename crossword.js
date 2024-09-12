@@ -41,51 +41,67 @@ inputs.forEach((input) => {
       case "ArrowRight":
         // squares index is one less than id
         newCell += 1;
-        if (!squares[newCell - 1]) {
-          break;
-        }
-        while (!squares[newCell - 1].children[0]) {
+        while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
+          if (!squares[newCell - 1]) {
+            break;
+          }
           newCell += 1;
         }
-        applyGridHighlight(newCell);
-        squares[newCell - 1].children[0].classList.add("highlight-selected");
-        break;
+        if (!squares[newCell - 1]) {
+          break;
+        } else {
+          applyGridHighlight(newCell);
+          squares[newCell - 1].children[0].classList.add("highlight-selected");
+          break;
+        }
       case "ArrowLeft":
         // squares index is one less than id
         newCell -= 1;
-        if (!squares[newCell - 1]) {
-          break;
-        }
-        while (!squares[newCell - 1].children[0]) {
+        while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
+          if (!squares[newCell - 1]) {
+            break;
+          }
           newCell -= 1;
         }
-        applyGridHighlight(newCell);
-        squares[newCell - 1].children[0].classList.add("highlight-selected");
-        break;
+        if (!squares[newCell - 1]) {
+          break;
+        } else {
+          applyGridHighlight(newCell);
+          squares[newCell - 1].children[0].classList.add("highlight-selected");
+          break;
+        }
       case "ArrowDown":
         // squares index is one less than id
         newCell += colCount;
-        if (!squares[newCell - 1]) {
-          break;
-        }
-        while (!squares[newCell - 1].children[0]) {
+        while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
+          if (!squares[newCell - 1]) {
+            break;
+          }
           newCell += colCount;
         }
-        applyGridHighlight(newCell);
-        squares[newCell - 1].children[0].classList.add("highlight-selected");
-        break;
+        if (!squares[newCell - 1]) {
+          break;
+        } else {
+          applyGridHighlight(newCell);
+          squares[newCell - 1].children[0].classList.add("highlight-selected");
+          break;
+        }
       case "ArrowUp":
         // squares index is one less than id
         newCell -= colCount;
-        if (!squares[newCell - 1]) {
-          break;
-        }
-        while (!squares[newCell - 1].children[0]) {
+        while (!squares[newCell - 1] || !squares[newCell - 1].children[0]) {
+          if (!squares[newCell - 1]) {
+            break;
+          }
           newCell -= colCount;
         }
-        applyGridHighlight(newCell);
-        squares[newCell - 1].children[0].classList.add("highlight-selected");
-        break;
+        if (!squares[newCell - 1]) {
+          break;
+        } else {
+          applyGridHighlight(newCell);
+          squares[newCell - 1].children[0].classList.add("highlight-selected");
+          break;
+        }
     }
   });
 });
