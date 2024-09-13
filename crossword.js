@@ -139,14 +139,23 @@ function highlightDown(id) {
 
 // apply grid highlighting after certain events
 function applyGridHighlight(id) {
-  // toggle between across and vertical highlighting
-  if (id === prevCell && prevHighlight === "across") {
-    highlightDown(id);
-    prevHighlight = "down";
+  if (id === prevCell) {
+    // toggling (by spacebar or repeated clicks) changes highlight direction
+    if (prevHighlight === "across") {
+      highlightDown(id);
+      prevHighlight = "down";
+    } else {
+      highlightAcross(id);
+      prevHighlight = "across";
+    }
   } else {
-    highlightAcross(id);
-    prevHighlight = "across";
+    // movement to a different cell should maintain highlight direction
+    if (prevHighlight === "across") {
+      highlightAcross(id);
+      prevCell = id;
+    } else {
+      highlightDown(id);
+      prevCell = id;
+    }
   }
-
-  prevCell = id;
 }
