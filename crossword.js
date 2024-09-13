@@ -11,9 +11,9 @@ let idCounter = 1;
 squares.forEach((square) => {
   square.setAttribute("id", idCounter);
   // start debug
-  if (square.children[0]) {
-    square.children[0].setAttribute("value", idCounter);
-  }
+  // if (square.children[0]) {
+  //   square.children[0].setAttribute("value", idCounter);
+  // }
   // end debug
   idCounter += 1;
 });

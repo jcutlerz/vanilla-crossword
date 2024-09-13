@@ -49,8 +49,24 @@ div {
   max-height: 200px;
 }
 
+.square {
+  display: grid;
+  justify-items: start;
+  align-items: start;
+}
+
 .square--inactive {
   background-color: black;
+}
+
+.square > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.square > p {
+  font-size: x-small;
+  margin: 0;
 }
 
 input {
@@ -61,6 +77,7 @@ input {
   caret-color: transparent;
   cursor: default;
   outline: none;
+  text-align: center;
 }
 
 input::selection {
