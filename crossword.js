@@ -3,6 +3,8 @@ const colCount = 8;
 
 const squares = document.querySelectorAll(".square");
 const inputs = document.querySelectorAll("input");
+const acrossClues = document.querySelectorAll(".left-side > p");
+const downClues = document.querySelectorAll(".right-side > p");
 let prevCell = 0;
 let prevHighlight = "across";
 
@@ -15,6 +17,20 @@ squares.forEach((square) => {
   //   square.children[0].setAttribute("value", idCounter);
   // }
   // end debug
+  idCounter += 1;
+});
+
+// number each clue
+idCounter = 1;
+acrossClues.forEach((clue) => {
+  clue.classList.add("clue-selected");
+  clue.setAttribute("id", "across-" + idCounter);
+  idCounter += 1;
+});
+idCounter = 1;
+downClues.forEach((clue) => {
+  clue.classList.add("clue-selected-alt");
+  clue.setAttribute("id", "down-" + idCounter);
   idCounter += 1;
 });
 

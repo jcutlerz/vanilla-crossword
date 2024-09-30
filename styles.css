@@ -91,3 +91,11 @@ input::selection {
 .highlight-grid {
   background-color: lightpink;
 }
+
+.clue-selected {
+  border: 2px solid red;
+}
+
+.clue-selected-alt {
+  border: 2px solid blue;
+}
