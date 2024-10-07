@@ -5,46 +5,37 @@ const squares = document.querySelectorAll(".square");
 const inputs = document.querySelectorAll("input");
 const acrossClues = document.querySelectorAll(".left-side > p");
 const downClues = document.querySelectorAll(".right-side > p");
-let prevCell = 0;
-let prevHighlight = "across";
+let selectedCell = 0;
+let direction = "across";
 
 // number each square
 let idCounter = 1;
 squares.forEach((square) => {
   square.setAttribute("id", idCounter);
-  // start debug
-  // if (square.children[0]) {
-  //   square.children[0].setAttribute("value", idCounter);
-  // }
-  // end debug
   idCounter += 1;
 });
 
 // number each clue
-idCounter = 1;
 acrossClues.forEach((clue) => {
-  clue.classList.add("clue-selected");
-  clue.setAttribute("id", "across-" + idCounter);
-  idCounter += 1;
+  // clue.classList.add("clue-selected");
+  clue.setAttribute("id", "across-" + clue.innerHTML[0]);
 });
-idCounter = 1;
 downClues.forEach((clue) => {
-  clue.classList.add("clue-selected-alt");
-  clue.setAttribute("id", "down-" + idCounter);
-  idCounter += 1;
+  // clue.classList.add("clue-selected-alt");
+  clue.setAttribute("id", "down-" + clue.innerHTML[0]);
 });
 
 inputs.forEach((input) => {
   // click - apply highlighting to cell
   input.addEventListener("click", (event) => {
-    let parentEl = event.target.parentElement;
-    let selectedId = parseInt(parentEl.id);
+    const selectedId = parseInt(event.target.parentElement.id);
     applyGridHighlight(selectedId);
     input.classList.add("highlight-selected");
+    applyClueHighlight();
   });
 
   input.addEventListener("keyup", (event) => {
-    let newCell = prevCell;
+    let newCell = selectedCell;
     let i = 0;
     switch (event.key) {
       // spacebar - toggle highlighting direction
@@ -82,14 +73,22 @@ inputs.forEach((input) => {
           break;
         }
     }
+    applyClueHighlight();
   });
 });
 
 // clear all previous highlighting
 function clearGridHighlighting() {
-  inputs.forEach((input) => {
-    input.classList.remove("highlight-grid");
-    input.classList.remove("highlight-selected");
+  const clearables = document.querySelectorAll(
+    ".highlight-grid, .highlight-selected, .clue-selected"
+  );
+
+  clearables.forEach((item) => {
+    item.classList.remove(
+      "highlight-grid",
+      "highlight-selected",
+      "clue-selected"
+    );
   });
 }
 
@@ -99,14 +98,14 @@ function highlightAcross(id) {
   if (id % colCount === 0) {
     rowBegin = id - colCount + 1;
   } else rowBegin = Math.floor(id / colCount) * colCount + 1;
-  let rowEnd = rowBegin + colCount - 1;
+  const rowEnd = rowBegin + colCount - 1;
 
   // clear previously applied highlighting
   clearGridHighlighting();
 
   // highlight to the left of selected cell
   for (let i = id - 1; i >= rowBegin; i--) {
-    let cell = document.getElementById(i);
+    const cell = document.getElementById(i);
     if (!cell.children[0]) {
       break;
     }
@@ -115,7 +114,7 @@ function highlightAcross(id) {
 
   // highlight to the right of selected cell
   for (let i = id + 1; i <= rowEnd; i++) {
-    let cell = document.getElementById(i);
+    const cell = document.getElementById(i);
     if (!cell.children[0]) {
       break;
     }
@@ -133,7 +132,7 @@ function highlightDown(id) {
     if (i === id) {
       continue;
     }
-    let cell = document.getElementById(i);
+    const cell = document.getElementById(i);
     if (!cell.children[0]) {
       break;
     }
@@ -145,7 +144,7 @@ function highlightDown(id) {
     if (i === id) {
       continue;
     }
-    let cell = document.getElementById(i);
+    const cell = document.getElementById(i);
     if (!cell.children[0]) {
       break;
     }
@@ -155,23 +154,37 @@ function highlightDown(id) {
 
 // apply grid highlighting after certain events
 function applyGridHighlight(id) {
-  if (id === prevCell) {
+  if (id === selectedCell) {
     // toggling (by spacebar or repeated clicks) changes highlight direction
-    if (prevHighlight === "across") {
+    if (direction === "across") {
       highlightDown(id);
-      prevHighlight = "down";
+      direction = "down";
     } else {
       highlightAcross(id);
-      prevHighlight = "across";
+      direction = "across";
     }
   } else {
     // movement to a different cell should maintain highlight direction
-    if (prevHighlight === "across") {
+    if (direction === "across") {
       highlightAcross(id);
-      prevCell = id;
+      selectedCell = id;
     } else {
       highlightDown(id);
-      prevCell = id;
+      selectedCell = id;
     }
   }
+}
+
+// apply clue highlighting
+function applyClueHighlight() {
+  const highlighted = document.querySelector(
+    ".highlight-grid, .highlight-selected"
+  );
+
+  const clueNumber = document.querySelector(
+    "#" + CSS.escape(highlighted.parentElement.id) + " > p"
+  ).innerHTML;
+
+  const actualClue = document.querySelector("#" + direction + "-" + clueNumber);
+  actualClue.classList.add("clue-selected");
 }
