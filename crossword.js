@@ -70,10 +70,17 @@ inputs.forEach((input) => {
         } else {
           applyGridHighlight(newCell);
           squares[newCell - 1].children[0].classList.add("highlight-selected");
+          squares[newCell - 1].children[0].focus();
           break;
         }
     }
     applyClueHighlight();
+    const alpha = /^[A-Za-z]$/;
+    if (alpha.test(event.key)) {
+      input.value = event.key.toUpperCase();
+    } else if (event.key === "Delete") {
+      input.value = "";
+    }
   });
 });
 
