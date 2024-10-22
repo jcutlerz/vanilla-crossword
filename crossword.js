@@ -1,5 +1,5 @@
-const rowCount = 8;
-const colCount = 8;
+const rowCount = 13;
+const colCount = 13;
 
 const squares = document.querySelectorAll(".square");
 const inputs = document.querySelectorAll("input");
