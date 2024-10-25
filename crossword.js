@@ -18,11 +18,11 @@ squares.forEach((square) => {
 // number each clue
 acrossClues.forEach((clue) => {
   // clue.classList.add("clue-selected");
-  clue.setAttribute("id", "across-" + clue.innerHTML[0]);
+  clue.setAttribute("id", "across-" + clue.innerHTML.match(/^\d+/));
 });
 downClues.forEach((clue) => {
   // clue.classList.add("clue-selected-alt");
-  clue.setAttribute("id", "down-" + clue.innerHTML[0]);
+  clue.setAttribute("id", "down-" + clue.innerHTML.match(/^\d+/));
 });
 
 inputs.forEach((input) => {
