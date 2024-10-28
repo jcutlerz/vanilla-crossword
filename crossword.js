@@ -1,6 +1,12 @@
 const rowCount = 13;
 const colCount = 13;
 
+const answer =
+  "PEPPESTSILOAVAASHEHOEDRAGUSEDOWEDELLATARS\
+STAYYAWNSTINETOOPALANTAVOWSICEGASTAMZONE\
+BETSYONESCOALOBOEALTOALLYEDSMEOWLIKERIP\
+POPSLESSSEA";
+
 const squares = document.querySelectorAll(".square");
 const inputs = document.querySelectorAll("input");
 const acrossClues = document.querySelectorAll(".left-side > p");
@@ -78,6 +84,7 @@ inputs.forEach((input) => {
     const alpha = /^[A-Za-z]$/;
     if (alpha.test(event.key)) {
       input.value = event.key.toUpperCase();
+      checkAnswer();
     } else if (event.key === "Delete") {
       input.value = "";
     }
@@ -194,4 +201,15 @@ function applyClueHighlight() {
 
   const actualClue = document.querySelector("#" + direction + "-" + clueNumber);
   actualClue.classList.add("clue-selected");
+}
+
+// when all inputs have a value, check if answer is correct
+function checkAnswer() {
+  const user_answer = Array.from(inputs)
+    .map((input) => input.value)
+    .join("");
+
+  if (user_answer === answer) {
+    console.log("We have a winner!!!");
+  }
 }
