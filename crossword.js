@@ -85,7 +85,7 @@ inputs.forEach((input) => {
     if (alpha.test(event.key)) {
       input.value = event.key.toUpperCase();
       checkAnswer();
-    } else if (event.key === "Delete") {
+    } else if (event.key === "Delete" || event.key === "Backspace") {
       input.value = "";
     }
   });
