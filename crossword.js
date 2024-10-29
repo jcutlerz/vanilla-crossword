@@ -14,6 +14,19 @@ const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
 let direction = "across";
 
+// used to simulate arrow keys being pressed after letter entered
+const downArrowKeyUpEvent = new KeyboardEvent("keyup", {
+  key: "ArrowDown",
+  code: "ArrowDown",
+  bubbles: true,
+});
+
+const rightArrowKeyUpEvent = new KeyboardEvent("keyup", {
+  key: "ArrowRight",
+  code: "ArrowRight",
+  bubbles: true,
+});
+
 // number each square
 let idCounter = 1;
 squares.forEach((square) => {
@@ -85,6 +98,11 @@ inputs.forEach((input) => {
     if (alpha.test(event.key)) {
       input.value = event.key.toUpperCase();
       checkAnswer();
+      if (direction === "across") {
+        input.dispatchEvent(rightArrowKeyUpEvent);
+      } else {
+        input.dispatchEvent(downArrowKeyUpEvent);
+      }
     } else if (event.key === "Delete" || event.key === "Backspace") {
       input.value = "";
     }
@@ -212,4 +230,13 @@ function checkAnswer() {
   if (user_answer === answer) {
     console.log("We have a winner!!!");
   }
+}
+
+// simulated key presses to occur after entering a letter
+function triggerRightArrowKeyUp() {
+  input.dispatchEvent(rightArrowKeyUpEvent);
+}
+
+function triggerUpArrowKeyUp() {
+  input.dispatchEvent(downArrowKeyUpEvent);
 }
