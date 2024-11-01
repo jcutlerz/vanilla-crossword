@@ -14,6 +14,11 @@ const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
 let direction = "across";
 
+// prevent spacebar from scrolling (observed in chrome)
+window.onkeydown = function (e) {
+  return !(e.key == " ");
+};
+
 // used to simulate arrow keys being pressed after letter entered
 const downArrowKeyUpEvent = new KeyboardEvent("keyup", {
   key: "ArrowDown",
