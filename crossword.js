@@ -13,6 +13,10 @@ const acrossClues = document.querySelectorAll(".left-side > p");
 const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
 let direction = "across";
+let reset = document.querySelector("#reset-btn");
+reset.onclick = function () {
+  resetPuzzle();
+};
 
 // prevent spacebar from scrolling (observed in chrome)
 window.onkeydown = function (e) {
@@ -244,4 +248,11 @@ function triggerRightArrowKeyUp() {
 
 function triggerUpArrowKeyUp() {
   input.dispatchEvent(downArrowKeyUpEvent);
+}
+
+function resetPuzzle() {
+  console.log("here");
+  inputs.forEach((input) => {
+    input.value = "";
+  });
 }
