@@ -13,7 +13,7 @@ const acrossClues = document.querySelectorAll(".left-side > p");
 const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
 let direction = "across";
-let reset = document.querySelector("#reset-btn");
+const reset = document.querySelector("#reset-btn");
 reset.onclick = function () {
   resetPuzzle();
 };
@@ -239,15 +239,6 @@ function checkAnswer() {
   if (user_answer === answer) {
     console.log("We have a winner!!!");
   }
-}
-
-// simulated key presses to occur after entering a letter
-function triggerRightArrowKeyUp() {
-  input.dispatchEvent(rightArrowKeyUpEvent);
-}
-
-function triggerUpArrowKeyUp() {
-  input.dispatchEvent(downArrowKeyUpEvent);
 }
 
 function resetPuzzle() {

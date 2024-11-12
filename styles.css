@@ -17,14 +17,22 @@ div {
   background-color: white;
 }
 
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
 .container {
   display: flex;
   flex-direction: row;
+  margin-top: 200px;
 }
 
 .left-side,
 .right-side {
   flex-grow: 1;
+  overflow-y: auto;
 }
 
 .outer-box {
@@ -47,6 +55,7 @@ div {
   max-width: 300px;
   min-height: 300px;
   max-height: 300px;
+  position: fixed;
 }
 
 .square {
