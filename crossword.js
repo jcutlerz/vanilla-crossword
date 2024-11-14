@@ -1,6 +1,9 @@
 const rowCount = 13;
 const colCount = 13;
 
+// manually offset from header when scrolling clue divs
+const clueOffset = 265;
+
 const answer =
   "PEPPESTSILOAVAASHEHOEDRAGUSEDOWEDELLATARS\
 STAYYAWNSTINETOOPALANTAVOWSICEGASTAMZONE\
@@ -235,11 +238,10 @@ function applyClueHighlight() {
   actualClue.classList.add("clue-selected");
 
   const cluePosition = actualClue.offsetTop;
-  const offset = 265;
   if (direction === "across") {
-    leftDiv.scrollTop = cluePosition - offset;
+    leftDiv.scrollTop = cluePosition - clueOffset;
   } else {
-    rightDiv.scrollTop = cluePosition - offset;
+    rightDiv.scrollTop = cluePosition - clueOffset;
   }
 }
 
@@ -267,4 +269,5 @@ function resetPuzzle() {
   inputs[0].focus();
   selectedCell = 1;
   applyClueHighlight();
+  rightDiv.scrollTop = document.querySelector("#down-1").offsetTop - clueOffset;
 }
