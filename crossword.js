@@ -14,7 +14,7 @@ const rightDiv = document.querySelector(".right-side");
 const acrossClues = document.querySelectorAll(".left-side > p");
 const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
-let direction = "across";
+
 const reset = document.querySelector("#reset-btn");
 reset.onclick = function () {
   resetPuzzle();
@@ -54,6 +54,9 @@ downClues.forEach((clue) => {
   // clue.classList.add("clue-selected-alt");
   clue.setAttribute("id", "down-" + clue.innerHTML.match(/^\d+/));
 });
+
+// set up defaults
+resetPuzzle();
 
 inputs.forEach((input) => {
   // click - apply highlighting to cell
@@ -232,8 +235,6 @@ function applyClueHighlight() {
   actualClue.classList.add("clue-selected");
 
   const cluePosition = actualClue.offsetTop;
-  console.log(actualClue);
-  console.log(cluePosition);
   const offset = 265;
   if (direction === "across") {
     leftDiv.scrollTop = cluePosition - offset;
@@ -254,8 +255,16 @@ function checkAnswer() {
 }
 
 function resetPuzzle() {
-  console.log("here");
+  // clear every input
   inputs.forEach((input) => {
     input.value = "";
   });
+
+  // highlight 1 across (not necessarily first square)
+  highlightAcross(parseInt(inputs[0].parentElement.id));
+  inputs[0].classList.add("highlight-selected");
+  direction = "across";
+  inputs[0].focus();
+  selectedCell = 1;
+  applyClueHighlight();
 }
