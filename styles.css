@@ -36,6 +36,7 @@ div {
   height: 100vh;
   padding-left: 10px;
   padding-top: 5px;
+  padding-bottom: 500px;
   scrollbar-width: none;
 }
 
@@ -46,6 +47,7 @@ div {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: none;
 }
 
 .inner-box {

@@ -23,6 +23,14 @@ reset.onclick = function () {
   resetPuzzle();
 };
 
+// Disable user scroll wheel
+const noScrollElements = document.querySelectorAll(".no-scroll");
+noScrollElements.forEach((noScroll) => {
+  noScroll.onwheel = function () {
+    return false;
+  };
+});
+
 // prevent spacebar from scrolling (observed in chrome)
 window.onkeydown = function (e) {
   return !(e.key == " ");
