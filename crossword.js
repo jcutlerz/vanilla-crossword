@@ -9,6 +9,8 @@ POPSLESSSEA";
 
 const squares = document.querySelectorAll(".square");
 const inputs = document.querySelectorAll("input");
+const leftDiv = document.querySelector(".left-side");
+const rightDiv = document.querySelector(".right-side");
 const acrossClues = document.querySelectorAll(".left-side > p");
 const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
@@ -228,6 +230,16 @@ function applyClueHighlight() {
 
   const actualClue = document.querySelector("#" + direction + "-" + clueNumber);
   actualClue.classList.add("clue-selected");
+
+  const cluePosition = actualClue.offsetTop;
+  console.log(actualClue);
+  console.log(cluePosition);
+  const offset = 265;
+  if (direction === "across") {
+    leftDiv.scrollTop = cluePosition - offset;
+  } else {
+    rightDiv.scrollTop = cluePosition - offset;
+  }
 }
 
 // when all inputs have a value, check if answer is correct

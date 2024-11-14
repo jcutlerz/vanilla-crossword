@@ -31,15 +31,18 @@ div {
 
 .left-side,
 .right-side {
-  flex-grow: 1;
+  flex: 1;
   overflow-y: auto;
+  height: 100vh;
+  padding-left: 10px;
+  padding-top: 5px;
+  scrollbar-width: none;
 }
 
 .outer-box {
-  min-width: 400px;
-  max-width: 400px;
-  min-height: 400px;
-  max-height: 400px;
+  flex: 1;
+  width: 400px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,10 +54,8 @@ div {
   grid-template-rows: repeat(13, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  min-width: 300px;
-  max-width: 300px;
-  min-height: 300px;
-  max-height: 300px;
+  width: 300px;
+  height: 300px;
   position: fixed;
 }
 
