@@ -2,7 +2,7 @@ const rowCount = 13;
 const colCount = 13;
 
 // manually offset from header when scrolling clue divs
-const clueOffset = 265;
+const clueOffset = 365;
 
 const answer =
   "PEPPESTSILOAVAASHEHOEDRAGUSEDOWEDELLATARS\
