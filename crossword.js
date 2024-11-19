@@ -38,7 +38,7 @@ noScrollElements.forEach((noScroll) => {
 
 // prevent spacebar from scrolling (observed in chrome)
 window.onkeydown = function (e) {
-  return !(e.key == " ");
+  return !(e.key == " " || e.key == "ArrowDown" || e.key == "ArrowUp");
 };
 
 // used to simulate arrow keys being pressed after letter entered
