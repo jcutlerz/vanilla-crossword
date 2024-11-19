@@ -18,6 +18,11 @@ const acrossClues = document.querySelectorAll(".left-side > p");
 const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
 
+// Modal variables
+const modal = document.getElementById("victory-modal");
+const btn = document.getElementById("test-victory-btn");
+const span = document.getElementsByClassName("close")[0];
+
 const reset = document.querySelector("#reset-btn");
 reset.onclick = function () {
   resetPuzzle();
@@ -261,6 +266,7 @@ function checkAnswer() {
 
   if (user_answer === answer) {
     console.log("We have a winner!!!");
+    modal.style.display = "block";
   }
 }
 
@@ -279,3 +285,19 @@ function resetPuzzle() {
   applyClueHighlight();
   rightDiv.scrollTop = document.querySelector("#down-1").offsetTop - clueOffset;
 }
+
+// Victory Modal functions
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
