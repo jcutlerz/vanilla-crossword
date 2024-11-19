@@ -8,19 +8,32 @@ html {
   box-sizing: inherit;
 }
 
+/* hide page scrollbar */
+html {
+  scrollbar-width: none;
+} /* Firefox */
 body {
-  border: 1px solid red;
-}
+  -ms-overflow-style: none;
+} /* IE and Edge */
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-button {
+  display: none;
+} /* Chrome */
+/* end hide page scrollbar */
 
 div {
   border: 1px solid black;
   background-color: white;
+  scrollbar-width: none;
 }
 
 .header {
   position: fixed;
   width: 100%;
+  height: 200px;
+  border: none;
   top: 0;
+  text-align: center;
 }
 
 .container {
@@ -41,13 +54,12 @@ div {
 }
 
 .outer-box {
-  flex: 2;
-  width: 400px;
-  height: 400px;
+  flex: 1;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   border-bottom: none;
+  padding-top: 50px;
 }
 
 .inner-box {
@@ -58,7 +70,6 @@ div {
   grid-row-gap: 0px;
   width: 300px;
   height: 300px;
-  position: fixed;
 }
 
 .square {
@@ -134,8 +145,9 @@ input::selection {
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: lightgreen;
   margin: 15% auto;
+  height: 60%;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
