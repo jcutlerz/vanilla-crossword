@@ -11,17 +11,32 @@
 <body>
   <main>
     <div id="victory-modal" class="modal">
-      <div class="modal-content">
+      <div class="victory-modal-content">
         <span class="close">&times;</span>
-        <p>CONGRATS you successfully completed the crossword!</p>
+        <p>CONGRATS you successfully completed the crossword!<br>You know lots of things!</p>
+      </div>
+    </div>
+    <div id="instructions-modal" class="modal">
+      <div class="instructions-modal-content">
+        <span class="close">&times;</span>
+        <p>INSTRUCTIONS<br>
+          Clicking a cell will select it. Clicking it again will toggle the direction.<br>
+          You can also toggle direction with the spacebar.<br>
+          Use the arrow keys to move from cell to cell.<br>
+          Use the backspace or delete key to erase a cell's contents or just type over it.<br>
+          ENJOY and GOOD LUCK!
+        </p>
       </div>
     </div>
     <div id="header" class="header no-scroll">
+      <button id="test-victory-btn">Victory</button>
       <h1 class="header__title">from: Dell Puzzle Lovers Easy Crosswords</h1>
       <h3 class="header__subtitle">Issue 19, February 2011</h3>
       <h3 class="header__subtitle">coded by Jason Cutler</h3>
-      <button id="reset-btn">Reset Puzzle</button>
-      <button id="test-victory-btn">Victory</button>
+      <div id="buttons">
+        <button id="instruct-btn" class="header-btns">Instructions</button>
+        <button id="reset-btn" class="header-btns">Reset Puzzle</button>
+      </div>
     </div>
     <div class="container no-scroll">
       <div class="left-side">

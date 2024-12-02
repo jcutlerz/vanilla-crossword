@@ -18,11 +18,6 @@ const acrossClues = document.querySelectorAll(".left-side > p");
 const downClues = document.querySelectorAll(".right-side > p");
 let selectedCell = 0;
 
-// Modal variables
-const modal = document.getElementById("victory-modal");
-const btn = document.getElementById("test-victory-btn");
-const span = document.getElementsByClassName("close")[0];
-
 const reset = document.querySelector("#reset-btn");
 reset.onclick = function () {
   resetPuzzle();
@@ -286,18 +281,34 @@ function resetPuzzle() {
   rightDiv.scrollTop = document.querySelector("#down-1").offsetTop - clueOffset;
 }
 
+// Modal variables
+const vicModal = document.getElementById("victory-modal");
+const vicBtn = document.getElementById("test-victory-btn");
+const instModal = document.getElementById("instructions-modal");
+const instBtn = document.getElementById("instruct-btn");
+const spans = document.getElementsByClassName("close");
+
 // Victory Modal functions
-btn.onclick = function () {
-  modal.style.display = "block";
+vicBtn.onclick = function () {
+  vicModal.style.display = "block";
 };
 
-span.onclick = function () {
-  modal.style.display = "none";
+instBtn.onclick = function () {
+  instModal.style.display = "block";
+};
+
+spans[0].onclick = function () {
+  vicModal.style.display = "none";
+};
+
+spans[1].onclick = function () {
+  instModal.style.display = "none";
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target == vicModal || event.target == instModal) {
+    vicModal.style.display = "none";
+    instModal.style.display = "none";
   }
 };

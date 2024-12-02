@@ -36,10 +36,22 @@ div {
   text-align: center;
 }
 
+#buttons {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-btns {
+  margin: 10px;
+}
+
 .container {
   display: flex;
   flex-direction: row;
-  margin-top: 200px;
+  margin-top: 250px;
 }
 
 .left-side,
@@ -124,11 +136,9 @@ input::selection {
   border: 2px solid blue;
 }
 
-#reset-btn {
-  margin-bottom: 10px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+#test-victory-btn {
+  position: fixed;
+  left: 5%;
 }
 
 .modal {
@@ -144,8 +154,17 @@ input::selection {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+.victory-modal-content {
   background-color: lightgreen;
+  margin: 15% auto;
+  height: 60%;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.instructions-modal-content {
+  background-color: skyblue;
   margin: 15% auto;
   height: 60%;
   padding: 20px;
