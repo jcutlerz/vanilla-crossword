@@ -261,7 +261,7 @@ function checkAnswer() {
 
   if (user_answer === answer) {
     console.log("We have a winner!!!");
-    modal.style.display = "block";
+    vicModal.style.display = "block";
   }
 }
 
